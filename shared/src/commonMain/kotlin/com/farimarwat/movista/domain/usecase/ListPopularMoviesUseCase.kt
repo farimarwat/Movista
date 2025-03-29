@@ -1,10 +1,10 @@
-package com.farimarwat.movista.usecase
+package com.farimarwat.movista.domain.usecase
 
 import com.farimarwat.movista.domain.repository.MovieRepository
 import com.farimarwat.movista.network.model.MovieDto
 
 class ListPopularMoviesUseCase(private val repository: MovieRepository) {
-    operator suspend fun invoke():MovieDto{
+    suspend fun execute():MovieDto{
         return repository.getPopularMovies()
     }
 }

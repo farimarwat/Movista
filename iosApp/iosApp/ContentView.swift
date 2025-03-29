@@ -2,14 +2,19 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-
+    
+    let listPopularMovieUseCase:ListPopularMoviesUseCase
+    init(){
+        listPopularMovieUseCase = ProvideUseCase.shared.getListPopularMoviesUseCase()
+    }
 	var body: some View {
 		Text("")
             .onAppear{
                 Task{
                     do{
-                        let movieDto = try await ProvideUseCases.shared.getListPopularMoviesUseCase().invoke()
-                        movieDto.results.forEach { item in
+                        
+                        let movieDTO = try await listPopularMovieUseCase.execute()
+                        movieDTO.results.forEach { item in
                             print(item.title)
                         }
                     }catch let error {
