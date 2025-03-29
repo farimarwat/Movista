@@ -2,26 +2,41 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-    
-    let listPopularMovieUseCase:ListPopularMoviesUseCase
-    init(){
-        listPopularMovieUseCase = ProvideUseCase.shared.getListPopularMoviesUseCase()
-    }
+    @StateObject var viewModel:HomeViewModel = HomeViewModel()
 	var body: some View {
-		Text("")
+        NavigationStack{
+            VStack{
+                TabView {
+                    ForEach(viewModel.popularMovies,id:\.id){movie in
+                        PopularMovieItem(movie: movie)
+                    }
+                }
+                .tabViewStyle(.page)
+                .frame(height: 350)
+                Spacer()
+            }
             .onAppear{
                 Task{
-                    do{
-                        
-                        let movieDTO = try await listPopularMovieUseCase.execute()
-                        movieDTO.results.forEach { item in
-                            print(item.title)
-                        }
-                    }catch let error {
-                        print(error)
+                    await viewModel.fetchPopularMovies()
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("Movista")
+                        .font(.title2)
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        // Search action
+                        print("Search tapped")
+                    }) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.blue)
                     }
                 }
             }
+        }
+        
     }
 }
 
