@@ -28,9 +28,28 @@ fun MyApplicationTheme(
         )
     } else {
         lightColorScheme(
-            primary = Color(0xFF6200EE),
+            primary = Color(0xFF1DA1F2),
+            onPrimary = Color.White,
+            primaryContainer = Color(0xFFD0E8FF),
+            onPrimaryContainer = Color(0xFF003A75),
+
             secondary = Color(0xFF03DAC5),
-            tertiary = Color(0xFF3700B3)
+            onSecondary = Color.Black,
+
+            tertiary = Color(0xFF3700B3),
+            onTertiary = Color.White,
+
+            background = Color.White,
+            onBackground = Color.Black,
+
+            surface = Color(0xFFF5F5F5),
+            onSurface = Color.Black,
+
+            surfaceVariant = Color(0xFFE1E8ED),
+            onSurfaceVariant = Color.Black,
+
+            error = Color(0xFFD32F2F),
+            onError = Color.White
         )
     }
     val typography = Typography(

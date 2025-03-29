@@ -1,12 +1,11 @@
-package com.farimarwat.movista.network
+package com.farimarwat.movista.data.remote
 
-import com.farimarwat.movista.network.model.MovieDto
+import com.farimarwat.movista.data.model.MovieDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
 import io.ktor.client.request.url
-import io.ktor.http.append
 import io.ktor.http.parameters
 
 class MovieApi(private val client: HttpClient) {
@@ -15,7 +14,7 @@ class MovieApi(private val client: HttpClient) {
      --header 'Authorization:
      --header 'accept: application/json'*/
 
-    suspend fun getPopularMovies():MovieDto{
+    suspend fun getPopularMovies(): MovieDto {
         return client.get {
            url("https://api.themoviedb.org/3/movie/popular")
             parameters {

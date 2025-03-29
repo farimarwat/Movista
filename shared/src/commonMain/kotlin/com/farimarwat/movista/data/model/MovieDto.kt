@@ -1,4 +1,4 @@
-package com.farimarwat.movista.network.model
+package com.farimarwat.movista.data.model
 
 import kotlinx.serialization.Serializable
 
