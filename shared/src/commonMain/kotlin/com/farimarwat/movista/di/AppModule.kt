@@ -6,6 +6,7 @@ import com.farimarwat.movista.data.remote.MovieApi
 import com.farimarwat.movista.domain.usecase.ListPopularMoviesUseCase
 import com.farimarwat.movista.domain.usecase.ListTopRatedSeriesUseCase
 import com.farimarwat.movista.domain.usecase.ListTrendingMoviesUseCase
+import com.farimarwat.movista.domain.usecase.SearchMovieUseCase
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -18,6 +19,7 @@ val sharedModule = module {
     singleOf(::ListPopularMoviesUseCase)
     singleOf(::ListTrendingMoviesUseCase)
     singleOf(::ListTopRatedSeriesUseCase)
+    singleOf(::SearchMovieUseCase)
 }
 
 fun initKoin(){

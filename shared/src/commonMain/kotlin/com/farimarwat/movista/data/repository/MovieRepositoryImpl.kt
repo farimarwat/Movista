@@ -17,4 +17,8 @@ class MovieRepositoryImpl(private val api: MovieApi): MovieRepository {
     override suspend fun getTopRatedSeries(): SeriesDto {
         return api.getTopRatedSeries()
     }
+
+    override suspend fun searchMovie(query: String): MovieDto {
+        return api.searchMovie(query)
+    }
 }

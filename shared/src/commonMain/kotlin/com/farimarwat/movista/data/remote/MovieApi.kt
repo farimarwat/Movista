@@ -8,6 +8,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.headers
 import io.ktor.client.request.url
 import io.ktor.http.parameters
+import io.ktor.http.takeFrom
 
 class MovieApi(private val client: HttpClient) {
 
@@ -37,5 +38,17 @@ class MovieApi(private val client: HttpClient) {
                 append("page","1")
             }
         }.body<SeriesDto>()
+    }
+
+    suspend fun searchMovie(query:String):MovieDto{
+       return client.get {
+           url {
+               takeFrom("https://api.themoviedb.org/3/search/movie")
+               encodedParameters.append("query", query)
+               encodedParameters.append("include_adult", "false")
+               encodedParameters.append("language", "en-US")
+               encodedParameters.append("page", "1")
+           }
+        }.body<MovieDto>()
     }
 }

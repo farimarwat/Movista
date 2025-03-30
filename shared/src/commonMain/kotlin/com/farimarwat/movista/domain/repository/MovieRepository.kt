@@ -7,4 +7,5 @@ interface MovieRepository {
     suspend fun getPopularMovies(): MovieDto
     suspend fun getTrendingMovies():MovieDto
     suspend fun getTopRatedSeries():SeriesDto
+    suspend fun searchMovie(query:String):MovieDto
 }
