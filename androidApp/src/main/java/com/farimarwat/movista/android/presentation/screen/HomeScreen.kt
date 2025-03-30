@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.farimarwat.movista.android.presentation.components.MovieItem
 import com.farimarwat.movista.android.presentation.components.PopularMovieItem
+import com.farimarwat.movista.android.presentation.components.SeriesItem
 import com.farimarwat.movista.android.presentation.viewmodel.HomeScreenViewModel
 import com.farimarwat.movista.domain.model.Movie
 import org.koin.androidx.compose.koinViewModel
@@ -26,9 +27,11 @@ import org.koin.androidx.compose.koinViewModel
 fun HomeScreen(modifier: Modifier,viewModel: HomeScreenViewModel = koinViewModel()){
     val popularMovies by viewModel.popularMovies.collectAsStateWithLifecycle()
     val trendingMovies by viewModel.trendingMovies.collectAsStateWithLifecycle()
+    val topRatedSeries by viewModel.topRatedSeries.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
         viewModel.fetchPopularMovies()
         viewModel.fetchTrendingMovies()
+        viewModel.fetchTopRatedSeries()
     }
     Box(
         modifier = Modifier
@@ -61,6 +64,22 @@ fun HomeScreen(modifier: Modifier,viewModel: HomeScreenViewModel = koinViewModel
                    }
                }
            }
+            //Top Rated Series
+            if(topRatedSeries.size > 0){
+                Column {
+                    Text(
+                        text = "Top Rated Series",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    LazyRow (
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ){
+                        items(topRatedSeries){series ->
+                            SeriesItem(series)
+                        }
+                    }
+                }
+            }
         }
     }
 }

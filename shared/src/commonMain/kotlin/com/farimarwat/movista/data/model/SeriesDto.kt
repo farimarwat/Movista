@@ -3,9 +3,9 @@ package com.farimarwat.movista.data.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieDto(
+data class SeriesDto(
     val page: Int,
-    val results: List<MovieResultDto>,
+    val results: List<SeriesResultDto>,
     val total_pages: Int,
     val total_results: Int
 )
