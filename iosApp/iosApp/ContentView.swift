@@ -6,6 +6,7 @@ struct ContentView: View {
 	var body: some View {
         NavigationStack{
             VStack{
+                //Popular Movies
                 TabView {
                     ForEach(viewModel.popularMovies,id:\.id){movie in
                         PopularMovieItem(movie: movie)
@@ -13,11 +14,22 @@ struct ContentView: View {
                 }
                 .tabViewStyle(.page)
                 .frame(height: 350)
+                
+                //Trending Movies
+                ScrollView(.horizontal) {
+                    HStack{
+                        ForEach(viewModel.trendingMovies,id:\.id){movie in
+                            MovieItem(movie: movie)
+                        }
+                    }
+                }
+                
                 Spacer()
             }
             .onAppear{
                 Task{
                     await viewModel.fetchPopularMovies()
+                    await viewModel.fetchTrendingMovies()
                 }
             }
             .toolbar {

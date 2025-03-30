@@ -12,20 +12,32 @@ import shared
 class HomeViewModel:ObservableObject{
     //UseCases
     var listPopularMoviesUseCase:ListPopularMoviesUseCase
+    var listTrendingMoviesUseCase:ListTrendingMoviesUseCase
     
     @Published var popularMovies:[Movie] = []
-
+    @Published var trendingMovies:[Movie] = []
+    
     init(){
-        listPopularMoviesUseCase = ProvideUseCase.shared.getListPopularMoviesUseCase()
+        listPopularMoviesUseCase = UseCaseProvider.shared.getListPopularMoviesUseCase()
+        listTrendingMoviesUseCase = UseCaseProvider.shared.getListTrendingMoviesUseCase()
     }
     func fetchPopularMovies() async {
         do {
-            popularMovies = try await listPopularMoviesUseCase.execute().results.map({ item in
-                print(item.title)
-                return item.toMovie()
-            })
+            popularMovies = try await listPopularMoviesUseCase.execute().results.map{ item in
+                item.toMovie()
+            }
         } catch let error {
             print(error)
         }
     }
+    func fetchTrendingMovies() async{
+        do {
+            trendingMovies =  try await listTrendingMoviesUseCase.execute().results.map { item in
+                item.toMovie()
+            }
+        } catch let error {
+            print(error)
+        }
+    }
+    
 }
