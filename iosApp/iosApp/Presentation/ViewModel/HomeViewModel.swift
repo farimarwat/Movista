@@ -14,15 +14,18 @@ class HomeViewModel:ObservableObject{
     var listPopularMoviesUseCase:ListPopularMoviesUseCase
     var listTrendingMoviesUseCase:ListTrendingMoviesUseCase
     var listTopRatedSeriesUseCase:ListTopRatedSeriesUseCase
+    var searchMovieUseCase:SearchMovieUseCase
     
     @Published var popularMovies:[Movie] = []
     @Published var trendingMovies:[Movie] = []
     @Published var topRatedSeries:[Series] = []
+    @Published var searchedMovies:[Movie] = []
     
     init(){
         listPopularMoviesUseCase = UseCaseProvider.shared.getListPopularMoviesUseCase()
         listTrendingMoviesUseCase = UseCaseProvider.shared.getListTrendingMoviesUseCase()
         listTopRatedSeriesUseCase = UseCaseProvider.shared.getListTopRatedSeriesUseCase()
+        searchMovieUseCase = UseCaseProvider.shared.getSearchMovieUseCase()
     }
     
     @MainActor
@@ -56,6 +59,18 @@ class HomeViewModel:ObservableObject{
                 item.toSeries()
             }
             topRatedSeries = series
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    @MainActor
+    func fetchSearchMovies(query:String) async{
+        do {
+            let movies = try await searchMovieUseCase.execute(query: query).results.map { item in
+                item.toMovie()
+            }
+            searchedMovies = movies
         } catch let error {
             print(error)
         }

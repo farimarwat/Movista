@@ -7,8 +7,10 @@ struct iOSApp: App {
         AppModuleKt.doInitKoin()
     }
 	var body: some Scene {
+        var viewModel:HomeViewModel = HomeViewModel()
 		WindowGroup {
 			ContentView()
+                .environmentObject(viewModel)
 		}
 	}
 }

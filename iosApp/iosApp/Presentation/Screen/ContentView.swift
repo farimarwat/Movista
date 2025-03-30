@@ -2,7 +2,8 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-    @StateObject var viewModel:HomeViewModel = HomeViewModel()
+    @EnvironmentObject var viewModel:HomeViewModel
+    @State var showSearchSheet:Bool = false
 	var body: some View {
         NavigationStack{
             ScrollView(.vertical){
@@ -45,6 +46,10 @@ struct ContentView: View {
                 
                 }
             }
+            .sheet(isPresented: $showSearchSheet, content: {
+                MovieSearchView()
+                    .environmentObject(viewModel)
+            })
             .onAppear{
                 Task{
                     await viewModel.fetchPopularMovies()
@@ -59,8 +64,7 @@ struct ContentView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        // Search action
-                        print("Search tapped")
+                        showSearchSheet.toggle()
                     }) {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.blue)
@@ -74,6 +78,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
-		ContentView()
+        ContentView()
+            .environmentObject(HomeViewModel())
 	}
 }
