@@ -5,7 +5,7 @@ struct ContentView: View {
     @StateObject var viewModel:HomeViewModel = HomeViewModel()
 	var body: some View {
         NavigationStack{
-            VStack{
+            VStack(alignment:.leading, spacing: 4){
                 //Popular Movies
                 TabView {
                     ForEach(viewModel.popularMovies,id:\.id){movie in
@@ -16,6 +16,8 @@ struct ContentView: View {
                 .frame(height: 350)
                 
                 //Trending Movies
+                Text("Trending Movies")
+                    .font(.title3)
                 ScrollView(.horizontal) {
                     HStack{
                         ForEach(viewModel.trendingMovies,id:\.id){movie in

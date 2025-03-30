@@ -17,18 +17,20 @@ struct MovieItem: View {
                 image.image?
                     .resizable()
                     .scaledToFill()
+                    .clipped()
                 
             }
             Text(movie.title)
                 .font(.caption)
                 .frame(maxWidth: .infinity)
+                .padding(.horizontal,2)
                 .background(Color("ColorPrimary"))
                 .foregroundColor(Color("ColorOnPrimary"))
                 .lineLimit(1)
-                .padding(.horizontal,2)
+                .padding(.bottom,12)
             
         }
-        .frame(width: 150, height: 250)
+        .frame(width: 150, height: 200)
         .cornerRadius(8)
         .shadow(radius: 8)
     }
