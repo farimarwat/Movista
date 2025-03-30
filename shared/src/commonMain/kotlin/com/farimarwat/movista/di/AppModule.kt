@@ -4,6 +4,7 @@ import com.farimarwat.movista.data.repository.MovieRepositoryImpl
 import com.farimarwat.movista.domain.repository.MovieRepository
 import com.farimarwat.movista.data.remote.MovieApi
 import com.farimarwat.movista.domain.usecase.ListPopularMoviesUseCase
+import com.farimarwat.movista.domain.usecase.ListTrendingMoviesUseCase
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -14,6 +15,7 @@ val sharedModule = module {
     singleOf(::MovieApi)
     singleOf(::MovieRepositoryImpl).bind<MovieRepository>()
     singleOf(::ListPopularMoviesUseCase)
+    singleOf(::ListTrendingMoviesUseCase)
 }
 
 fun initKoin(){

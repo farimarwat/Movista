@@ -11,6 +11,7 @@ koin = "3.5.3"
 ktor = "3.1.1"
 navigation = "2.8.9"
 coil = "3.1.0"
+timber = "5.0.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -42,6 +43,7 @@ ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "kto
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 
 [plugins]

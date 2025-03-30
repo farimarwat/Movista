@@ -4,4 +4,5 @@ import com.farimarwat.movista.data.model.MovieDto
 
 interface MovieRepository {
     suspend fun getPopularMovies(): MovieDto
+    suspend fun getTrendingMovies():MovieDto
 }

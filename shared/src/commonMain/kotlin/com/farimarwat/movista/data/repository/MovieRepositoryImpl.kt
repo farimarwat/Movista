@@ -8,4 +8,8 @@ class MovieRepositoryImpl(private val api: MovieApi): MovieRepository {
     override suspend fun getPopularMovies(): MovieDto {
         return api.getPopularMovies()
     }
+
+    override suspend fun getTrendingMovies(): MovieDto {
+        return api.getTrendingMovies()
+    }
 }

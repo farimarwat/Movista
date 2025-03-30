@@ -27,4 +27,16 @@ class MovieApi(private val client: HttpClient) {
             }
         }.body<MovieDto>()
     }
+    suspend fun getTrendingMovies():MovieDto{
+        return client.get {
+            url("https://api.themoviedb.org/3/trending/movie/day")
+            parameters {
+                append("language","en-US")
+            }
+            headers {
+                append("Authorization","Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YjgwZGQ0MjE3N2FlMjVmZTg1OGEzNDNiYjJmYmRhNiIsIm5iZiI6MTc0Mjk2NjM1OS43NjgsInN1YiI6IjY3ZTM4ZTU3M2RiZTNhYjFmMmYwNGIyZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.APd4JECHic57qaX5vap5B-qGIYMzOB6OfAVRX66Wi2Q")
+                append("accept","application/json")
+            }
+        }.body<MovieDto>()
+    }
 }
