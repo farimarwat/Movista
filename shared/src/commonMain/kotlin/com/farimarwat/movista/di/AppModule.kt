@@ -3,6 +3,7 @@ package com.farimarwat.movista.di
 import com.farimarwat.movista.data.repository.MovieRepositoryImpl
 import com.farimarwat.movista.domain.repository.MovieRepository
 import com.farimarwat.movista.data.remote.MovieApi
+import com.farimarwat.movista.domain.usecase.GetMovieDetailsUseCase
 import com.farimarwat.movista.domain.usecase.ListPopularMoviesUseCase
 import com.farimarwat.movista.domain.usecase.ListTopRatedSeriesUseCase
 import com.farimarwat.movista.domain.usecase.ListTrendingMoviesUseCase
@@ -20,6 +21,7 @@ val sharedModule = module {
     singleOf(::ListTrendingMoviesUseCase)
     singleOf(::ListTopRatedSeriesUseCase)
     singleOf(::SearchMovieUseCase)
+    singleOf(::GetMovieDetailsUseCase)
 }
 
 fun initKoin(){

@@ -1,5 +1,6 @@
 package com.farimarwat.movista.data.repository
 
+import com.farimarwat.movista.data.model.MovieDetailsDto
 import com.farimarwat.movista.domain.repository.MovieRepository
 import com.farimarwat.movista.data.remote.MovieApi
 import com.farimarwat.movista.data.model.MovieDto
@@ -20,5 +21,9 @@ class MovieRepositoryImpl(private val api: MovieApi): MovieRepository {
 
     override suspend fun searchMovie(query: String): MovieDto {
         return api.searchMovie(query)
+    }
+
+    override suspend fun getMovieDetails(id: String): MovieDetailsDto {
+        return api.getMovieDetails(id)
     }
 }

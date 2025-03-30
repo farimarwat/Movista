@@ -1,5 +1,6 @@
 package com.farimarwat.movista.data.remote
 
+import com.farimarwat.movista.data.model.MovieDetailsDto
 import com.farimarwat.movista.data.model.MovieDto
 import com.farimarwat.movista.data.model.SeriesDto
 import io.ktor.client.HttpClient
@@ -50,5 +51,14 @@ class MovieApi(private val client: HttpClient) {
                encodedParameters.append("page", "1")
            }
         }.body<MovieDto>()
+    }
+
+    suspend fun getMovieDetails(id: String):MovieDetailsDto{
+        return client.get {
+            url("https://api.themoviedb.org/3/movie/$id")
+            parameters {
+                append("language","en-US")
+            }
+        }.body<MovieDetailsDto>()
     }
 }

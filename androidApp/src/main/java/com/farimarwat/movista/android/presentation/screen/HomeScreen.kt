@@ -21,10 +21,16 @@ import com.farimarwat.movista.android.presentation.components.PopularMovieItem
 import com.farimarwat.movista.android.presentation.components.SeriesItem
 import com.farimarwat.movista.android.presentation.viewmodel.HomeScreenViewModel
 import com.farimarwat.movista.domain.model.Movie
+import com.farimarwat.movista.domain.model.Series
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeScreen(modifier: Modifier,viewModel: HomeScreenViewModel = koinViewModel()){
+fun HomeScreen(
+    modifier: Modifier,
+    viewModel: HomeScreenViewModel = koinViewModel(),
+    onMovieClicked:(Movie)->Unit={},
+    onSeriesClicked:(Series)->Unit={}
+    ){
     val popularMovies by viewModel.popularMovies.collectAsStateWithLifecycle()
     val trendingMovies by viewModel.trendingMovies.collectAsStateWithLifecycle()
     val topRatedSeries by viewModel.topRatedSeries.collectAsStateWithLifecycle()
@@ -45,7 +51,9 @@ fun HomeScreen(modifier: Modifier,viewModel: HomeScreenViewModel = koinViewModel
                 state = pagerState
             ) { index ->
                 val movie = popularMovies.get(index)
-                PopularMovieItem(movie)
+                PopularMovieItem(movie){
+                    onMovieClicked(movie)
+                }
             }
 
             //Trending Movies

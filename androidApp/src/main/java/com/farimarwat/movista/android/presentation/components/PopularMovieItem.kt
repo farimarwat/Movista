@@ -57,11 +57,14 @@ fun PopularMovieItem_Preview() {
 }
 
 @Composable
-fun PopularMovieItem(movie: Movie, posterImageWidth: Int = 500) {
+fun PopularMovieItem(
+    movie: Movie,
+    onClicked:(Movie)->Unit={}
+    ) {
     Card(
         modifier = Modifier
             .padding(bottom = 8.dp),
-        onClick = {},
+        onClick = {onClicked(movie)},
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Column (
