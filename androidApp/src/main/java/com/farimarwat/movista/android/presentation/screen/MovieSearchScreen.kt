@@ -42,6 +42,7 @@ fun MovieSearchScreen(
     show:Boolean = false,
     viewModel: HomeScreenViewModel = koinViewModel(),
     onDismiss:()->Unit={},
+    onMovieClicked:(Movie)->Unit={},
 ){
     var query by remember { mutableStateOf("") }
     var sheetState = rememberModalBottomSheetState()
@@ -105,7 +106,9 @@ fun MovieSearchScreen(
 
                 LazyColumn{
                     items(list){item ->
-                        MovieSearchItem(movie = item)
+                        MovieSearchItem(movie = item){
+                            onMovieClicked(it)
+                        }
                     }
                 }
 

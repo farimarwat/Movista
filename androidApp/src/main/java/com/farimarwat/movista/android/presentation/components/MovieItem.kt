@@ -43,8 +43,12 @@ fun MovieItem(){
     MovieItem(movie)
 }
 @Composable
-fun MovieItem(movie:Movie){
+fun MovieItem(
+    movie:Movie,
+    onClicked:(Movie)->Unit={}
+){
     Card (
+        onClick = {onClicked(movie)},
         modifier = Modifier
             .padding(bottom = 8.dp),
         elevation = CardDefaults.cardElevation(8.dp)

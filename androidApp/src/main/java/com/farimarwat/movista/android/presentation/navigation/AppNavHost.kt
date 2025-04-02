@@ -36,7 +36,7 @@ fun AppNavHost(
             val id = backStackEntry.arguments?.getString("id") ?: "0"
             DetailsScreen(
                 modifier = modifier,
-                id = id
+                id = id,
             )
         }
     }

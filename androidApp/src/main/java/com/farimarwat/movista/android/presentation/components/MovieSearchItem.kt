@@ -54,8 +54,11 @@ fun MovieSearchItem_Previes(){
 }
 @Composable
 fun MovieSearchItem(
-    movie: Movie){
+    movie: Movie,
+    onClicked:(Movie)->Unit={}
+    ){
     Card (
+        onClick = {onClicked(movie)},
         modifier = Modifier
             .padding(bottom = 2.dp),
         elevation = CardDefaults.cardElevation(2.dp),

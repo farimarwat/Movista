@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.farimarwat.movista.android.presentation.navigation.AppNavHost
+import com.farimarwat.movista.android.presentation.navigation.Screen
 import com.farimarwat.movista.android.presentation.screen.MovieSearchScreen
 import org.koin.androidx.compose.koinViewModel
 
@@ -80,7 +81,11 @@ fun App(navHostController:NavHostController){
         )
         MovieSearchScreen(
             show = showSearchScreen,
-            onDismiss = {showSearchScreen = !showSearchScreen}
+            onDismiss = {showSearchScreen = !showSearchScreen},
+            onMovieClicked = {
+                navHostController.navigate("${Screen.Details.route}/${it.id}")
+                showSearchScreen = false
+            }
         )
     }
 }

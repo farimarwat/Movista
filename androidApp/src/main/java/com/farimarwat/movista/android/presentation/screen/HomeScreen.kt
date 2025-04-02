@@ -67,7 +67,9 @@ fun HomeScreen(
                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                    ){
                        items(trendingMovies){movie ->
-                           MovieItem(movie)
+                           MovieItem(movie){
+                               onMovieClicked(it)
+                           }
                        }
                    }
                }
