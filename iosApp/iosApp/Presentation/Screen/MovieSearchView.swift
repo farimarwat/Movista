@@ -32,9 +32,15 @@ struct MovieSearchView: View {
                 }
             }
         Spacer()
-        ScrollView(.vertical) {
-            ForEach(viewModel.searchedMovies,id:\.id){item in
-                MovieSearchItem(movie: item)
+        NavigationStack{
+            ScrollView(.vertical) {
+                ForEach(viewModel.searchedMovies,id:\.id){item in
+                    NavigationLink{
+                        MovieDetailsView(movieId: "\(item.id)")
+                    }label:{
+                        MovieSearchItem(movie: item)
+                    }
+                }
             }
         }
     }

@@ -3,7 +3,10 @@ import shared
 
 struct ContentView: View {
     @EnvironmentObject var viewModel:HomeViewModel
+
     @State var showSearchSheet:Bool = false
+    @State var selectedMovie:Movie? = nil
+    
 	var body: some View {
         NavigationStack{
             ScrollView(.vertical){
@@ -11,7 +14,11 @@ struct ContentView: View {
                     //Popular Movies
                     TabView {
                         ForEach(viewModel.popularMovies,id:\.id){movie in
-                            PopularMovieItem(movie: movie)
+                            NavigationLink{
+                                MovieDetailsView(movieId: "\(movie.id)")
+                            }label:{
+                                PopularMovieItem(movie: movie)
+                            }
                         }
                     }
                     .tabViewStyle(.page)
@@ -24,7 +31,11 @@ struct ContentView: View {
                         ScrollView(.horizontal) {
                             HStack{
                                 ForEach(viewModel.trendingMovies,id:\.id){movie in
-                                    MovieItem(movie: movie)
+                                    NavigationLink{
+                                        MovieDetailsView(movieId: "\(movie.id)")
+                                    }label:{
+                                        MovieItem(movie: movie)
+                                    }
                                 }
                             }
                         }
