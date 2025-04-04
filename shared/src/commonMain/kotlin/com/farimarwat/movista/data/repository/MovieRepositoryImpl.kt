@@ -1,22 +1,49 @@
 package com.farimarwat.movista.data.repository
 
+import com.farimarwat.movista.data.local.LocalDatabase
 import com.farimarwat.movista.data.model.MovieDetailsDto
 import com.farimarwat.movista.domain.repository.MovieRepository
 import com.farimarwat.movista.data.remote.MovieApi
 import com.farimarwat.movista.data.model.MovieDto
 import com.farimarwat.movista.data.model.SeriesDto
+import com.farimarwat.movista.domain.model.Movie
 
-class MovieRepositoryImpl(private val api: MovieApi): MovieRepository {
-    override suspend fun getPopularMovies(): MovieDto {
-        return api.getPopularMovies()
+class MovieRepositoryImpl(
+    private val api: MovieApi,
+    private val localDb:LocalDatabase
+    ): MovieRepository {
+    override suspend fun getPopularMovies(): List<Movie> {
+        return try {
+            val movies = api.getPopularMovies().results
+            val modified = movies.map { it.toMovie() }
+            localDb.insertPopularMovies(modified)
+             modified
+        } catch (ex:Exception){
+            println(ex.message)
+             localDb.readAllPopularMovies()
+        }
     }
 
-    override suspend fun getTrendingMovies(): MovieDto {
-        return api.getTrendingMovies()
+    override suspend fun getTrendingMovies(): List<Movie> {
+        return try {
+            val movies = api.getTrendingMovies().results
+            val modified = movies.map { it.toMovie() }
+            localDb.insertTrendingMovies(modified)
+             localDb.readAllTrendingMovies()
+        }catch (ex:Exception){
+            print(ex.message)
+             localDb.readAllTrendingMovies()
+        }
     }
 
-    override suspend fun getTopRatedSeries(): SeriesDto {
-        return api.getTopRatedSeries()
+    override suspend fun getTopRatedSeries(): SeriesDto? {
+        return try {
+             api.getTopRatedSeries()
+        }catch (ex:Exception){
+            print(ex)
+            null
+        }
+
     }
 
     override suspend fun searchMovie(query: String): MovieDto {

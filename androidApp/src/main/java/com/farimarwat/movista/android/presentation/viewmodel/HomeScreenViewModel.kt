@@ -43,15 +43,30 @@ class HomeScreenViewModel(
     val searchMovies = _searchMovies.asStateFlow()
 
     fun fetchPopularMovies() = viewModelScope.launch (Dispatchers.IO){
-        _popularMovies.value = listPopularMoviesUseCase.execute().results.map { it.toMovie() }
+        try{
+            _popularMovies.value = listPopularMoviesUseCase.execute()
+        }catch (ex:Exception){
+            Timber.i(ex)
+        }
     }
 
     fun fetchTrendingMovies() = viewModelScope.launch(Dispatchers.IO) {
-        _trendingMovies.value = listTrendingMoviesUseCase.execute().results.map { it.toMovie() }
+        try{
+            _trendingMovies.value = listTrendingMoviesUseCase.execute()
+        }catch (ex:Exception){
+            Timber.i(ex)
+        }
     }
 
     fun fetchTopRatedSeries() = viewModelScope.launch(Dispatchers.IO) {
-        _topRatedSeries.value = listTopRatedSeriesUseCase.execute().results.map { it.toSeries() }
+       try{
+           listTopRatedSeriesUseCase.execute()?.let{ dto ->
+               _topRatedSeries.value = dto.results.map { it.toSeries() }
+           }
+
+       }catch (ex:Exception){
+           Timber.i(ex)
+       }
     }
 
     fun fetchSearchMovies(query:String){

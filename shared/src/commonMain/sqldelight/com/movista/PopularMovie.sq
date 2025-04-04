@@ -1,0 +1,35 @@
+CREATE TABLE PopularMovie (
+    id INTEGER NOT NULL PRIMARY KEY,
+    adult INTEGER NOT NULL, -- SQLite doesn't have Boolean; we use INTEGER (0 = false, 1 = true)
+    backdropPath TEXT,       -- nullable
+    originalLanguage TEXT NOT NULL,
+    originalTitle TEXT NOT NULL,
+    overview TEXT NOT NULL,
+    popularity REAL NOT NULL,
+    posterPath TEXT,         -- nullable
+    releaseDate TEXT NOT NULL,
+    title TEXT NOT NULL,
+    video INTEGER NOT NULL,  -- boolean stored as INTEGER
+    voteAverage REAL NOT NULL,
+    voteCount INTEGER NOT NULL
+);
+
+insertMovie:
+INSERT INTO PopularMovie (
+    id,
+    adult,
+    backdropPath,
+    originalLanguage,
+    originalTitle,
+    overview,
+    popularity,
+    posterPath,
+    releaseDate,
+    title,
+    video,
+    voteAverage,
+    voteCount
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+readAllMovies:
+SELECT * FROM PopularMovie;
