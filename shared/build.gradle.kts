@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.org.jetbrains.kotlin.plugin.serialization)
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -43,14 +44,23 @@ kotlin {
             implementation(libs.ktor.client.logging)
             implementation(libs.ktor.client.content.negotiation)
 
+            //SqlDelight
+            implementation(libs.sqldelight.runtime)
+
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.koin.android)
+
+            //SqlDelight
+            implementation(libs.sqldelight.android.driver)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+
+            //SqlDelight
+            implementation(libs.sqldelight.native.driver)
         }
     }
 }
@@ -66,3 +76,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
+sqldelight{
+    databases{
+        create("MovistaDatabase"){
+            packageName.set("com.movista")
+        }
+    }
+}
+

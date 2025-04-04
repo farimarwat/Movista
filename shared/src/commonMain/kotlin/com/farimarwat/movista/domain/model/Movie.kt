@@ -4,7 +4,7 @@ data class Movie(
     val adult: Boolean,
     val backdropPath: String?,
     val genreIds: List<Int>,
-    val id: Int,
+    val id: Long,
     val originalLanguage: String,
     val originalTitle: String,
     val overview: String,
@@ -14,7 +14,7 @@ data class Movie(
     val title: String,
     val video: Boolean,
     val voteAverage: Double,
-    val voteCount: Int
+    val voteCount: Long
 ){
     fun getFullPosterPath(imageWidth:Int):String{
         return "https://image.tmdb.org/t/p/w$imageWidth${this.posterPath}"

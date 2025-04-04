@@ -12,6 +12,7 @@ ktor = "3.1.1"
 navigation = "2.8.9"
 coil = "3.1.0"
 timber = "5.0.1"
+sqldelight = "2.0.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -44,7 +45,9 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
-
+sqldelight-runtime = {module="app.cash.sqldelight:runtime", version.ref="sqldelight"}
+sqldelight-android-driver = {module="app.cash.sqldelight:android-driver",version.ref="sqldelight"}
+sqldelight-native-driver = {module="app.cash.sqldelight:native-driver",version.ref="sqldelight"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -54,4 +57,5 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 org-jetbrains-kotlin-plugin-serialization = {id = "org.jetbrains.kotlin.plugin.serialization",version.ref="kotlin"}
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 

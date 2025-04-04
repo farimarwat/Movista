@@ -3,6 +3,7 @@ package com.farimarwat.movista.android
 import android.app.Application
 import com.farimarwat.movista.android.di.appModules
 import com.farimarwat.movista.di.initKoin
+import com.farimarwat.movista.di.platformModule
 import com.farimarwat.movista.di.sharedModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -14,7 +15,7 @@ class BaseApplication:Application() {
         Timber.plant(Timber.DebugTree())
         startKoin {
             androidContext(this@BaseApplication)
-            modules(sharedModule+ appModules)
+            modules(sharedModule + platformModule + appModules)
         }
     }
 }

@@ -25,7 +25,7 @@ data class MovieResultDto(
             adult = this.adult,
             backdropPath = this.backdrop_path,
             genreIds = this.genre_ids,
-            id = this.id,
+            id = this.id.toLong(),
             originalLanguage = this.original_language,
             originalTitle =  this.original_title,
             overview = this.overview,
@@ -35,7 +35,7 @@ data class MovieResultDto(
             title = title,
             video = video,
             voteAverage = vote_average,
-            voteCount = vote_count
+            voteCount = vote_count.toLong()
         )
     }
 }

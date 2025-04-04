@@ -31,9 +31,7 @@ class HomeViewModel:ObservableObject{
     @MainActor
     func fetchPopularMovies() async {
         do {
-            let movies = try await listPopularMoviesUseCase.execute().results.map{ item in
-                item.toMovie()
-            }
+            let movies = try await listPopularMoviesUseCase.execute()
             popularMovies = movies
         } catch let error {
             print(error)
@@ -43,9 +41,7 @@ class HomeViewModel:ObservableObject{
     @MainActor
     func fetchTrendingMovies() async{
         do {
-            let movies =  try await listTrendingMoviesUseCase.execute().results.map { item in
-                item.toMovie()
-            }
+            let movies =  try await listTrendingMoviesUseCase.execute()
             trendingMovies = movies
         } catch let error {
             print(error)
@@ -55,10 +51,13 @@ class HomeViewModel:ObservableObject{
     @MainActor
     func fetchTopRatedSeries() async{
         do {
-            let series = try await listTopRatedSeriesUseCase.execute().results.map { item in
-                item.toSeries()
+            if let series = try await listTopRatedSeriesUseCase.execute()?.results {
+                let mapped = series.map{item in
+                    item.toSeries()
+                }
+                topRatedSeries = mapped
             }
-            topRatedSeries = series
+            
         } catch let error {
             print(error)
         }
